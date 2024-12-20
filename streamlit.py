@@ -18,13 +18,13 @@ st.set_page_config(
 )
 
 # -------------------------------------- Read dataset ------------------------------
-df = pd.read_pickle("data/data_sales_dash.pkl")
+df = pd.read_pickle("data_sales_dash.pkl")
 
 # ------------------------------- Membuat Sidebar ------------------------------
 with st.sidebar:
     # Menambahkan Logo Pribadi
     st.write("Hello 👋")
-    st.image("asset\data-science.png")
+    st.image("data-science.png")
     st.write("""
              Saya Nurillah Putri Sabina mempersembahkan Dashboard Analisis 
              Penjualan Supermarket, sebuah alat yang memudahkan menganalisis 
@@ -104,11 +104,11 @@ st.plotly_chart(fig_bar)
 st.write("### 3. Bagaimana Persebaran Total Penjualan dalam Hari maupun Jam Tertentu?")
 
 # A. Persiapan Data
-persebaran_day_hour = df.groupby(["Day of Week","Hour"])['Total'].sum().reset_index()
+persebaran_day_hour = df.groupby(["Day","Hour"])['Total'].sum().reset_index()
 
 # B. Visualisasi 
 fig_heatmap = px.density_heatmap(persebaran_day_hour,
-                   x="Day of Week",
+                   x="Day",
                    y="Hour",
                    z="Total",
                    title="Distribution of Total Transaction Value in Every Hour and Day",
